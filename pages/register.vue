@@ -4,14 +4,35 @@
       <v-card height="500" width="500" elevation="0">
         <div v-if="!$auth.loggedIn" >
           <v-row justify="center">
-              <img src="~/assets/images/logo.png" alt="company_logo" height="100px" width="200px">
+              <img src="~/assets/images/logo.png" alt="as_creations_company_logo" height="100px" width="200px">
           </v-row>
         </div>
-          <v-row justify="center" class="mt-n6" :class="{'mt-16 mb-5 pt-15': $auth.loggedIn}">
-              <v-card-title class="text-h5">Reset Password</v-card-title>
+          <v-row justify="center" class="mt-n2" :class="{'mt-16 mb-5 pt-15': $auth.loggedIn}">
+              <v-card-title class="text-h5">Register as an Employee</v-card-title>
           </v-row>
           <div class="pa-6 " >
               <v-form ref="form">
+                <v-text-field 
+                v-model="firstName" 
+                color="appmainblue" 
+                label="First Name"
+                :rules="[rules.required, rules.max]" 
+                >
+                </v-text-field>
+                <v-text-field 
+                v-model="lastName" 
+                color="appmainblue" 
+                label="Last Name"
+                :rules="[rules.required, rules.max]" 
+                >
+                </v-text-field>
+                <v-text-field 
+                v-model="email" 
+                color="appmainblue" 
+                label="Email" 
+                :rules="[rules.required, rules.email]" 
+                >
+                </v-text-field>
                   <v-text-field 
                   v-model="password" 
                   color="appmainblue" 
@@ -21,7 +42,6 @@
                   :type="show ? 'text' : 'password'"
                   @click:append="show = !show"
                   >
-                      Email
                   </v-text-field>
                   <v-text-field 
                   v-model="confPassword" 
@@ -63,13 +83,17 @@
 
 <script>
 export default {
+  layout: 'nonlogged',
   head() {
     return {
-      title: 'Reset Password',
+      title: 'Register',
     }
   },
   data() {
     return {
+      firstName: null,
+      lastName: null,
+      email: null,
       password: null,
       confPassword: null,
       snackbar: false,
@@ -83,29 +107,33 @@ export default {
         passwordRegex: v => {
           let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
           return pattern.test(v) || 'Min 8 Characters, atleast 1 uppercase, lowercase character and a number!'
+        },
+        max: v => (v || '').length <= 30 || 'Max 30 characters',
+        email: v => {
+            let pattern = /\S+@\S+\.\S+/
+            return pattern.test(v) || 'Enter a valid email!'
         }
       }
     }
   },
   async created() {
-    console.log(this.$route.query.token)
-    this.$store.commit('head/set', 'Reset Password')
+    this.$store.commit('head/set', 'Register')
   },
   methods: {
     async submit(){
       try {
         if(this.$refs.form.validate()){
-          let data = await this.$axios.$post('auth/employee/change-password', {
-            token: this.$route.query.token,
+          let data = await this.$axios.$post('auth/employee/register', {
+            name: this.firstName + ' ' + this.lastName,
+            email: this.email,
             password: this.password,
-            confPassword: this.confPassword
           })
           if(data.message.flag){
             this.message = data.message
             this.snackbarColor = '#73cfa6'
             this.snackbar = true
             setTimeout(() => {
-              this.$router.push('/')
+              this.$router.push('/login')
             }, 3500)
           }
         }

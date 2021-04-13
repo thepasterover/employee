@@ -25,7 +25,7 @@
       <v-col offset=1 offset-md=0 cols=12 md=4 sm=5 class="mb-6">
         <v-card shaped width="200" flat outlined>
           <v-img 
-          :src="'http://localhost:5000' + avatar"
+          :src="'https://employeesys.herokuapp.com' + avatar"
           height='200'
           width='200'
           contain
