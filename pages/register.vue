@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10">
+  <div class="mt-16">
       <v-row justify="center" align="center">
       <v-card height="500" width="500" elevation="0">
         <div v-if="!$auth.loggedIn" >
@@ -7,7 +7,7 @@
               <img src="~/assets/images/logo.png" alt="as_creations_company_logo" height="100px" width="200px">
           </v-row>
         </div>
-          <v-row justify="center" class="mt-n2" :class="{'mt-16 mb-5 pt-15': $auth.loggedIn}">
+          <v-row justify="center" class="mt-4" :class="{'mt-16 mb-5 pt-15': $auth.loggedIn}">
               <v-card-title class="text-h5">Register as an Employee</v-card-title>
           </v-row>
           <div class="pa-6 " >

@@ -22,7 +22,7 @@
       </v-snackbar>
     <h3>My Account</h3>
     <v-row class="mt-2 pa-2" justify="space-around" align-content="space-around">
-      <v-col offset=1 offset-md=0 cols=12 md=4 sm=5 class="mb-6">
+      <v-col cols=12 md=4 sm=5 class="mb-6">
         <v-card shaped width="200" flat outlined>
           <v-img 
           :src="'https://employeesys.herokuapp.com' + avatar"

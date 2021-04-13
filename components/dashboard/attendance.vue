@@ -5,7 +5,7 @@
         <h3>Attendance Overview</h3>
       </v-col>
       <v-spacer></v-spacer>
-      <v-col md=2 cols=4>
+      <v-col md=2 cols=5>
         <v-menu offset-y >
             <template v-slot:activator="{ on, attrs }">
             <p

@@ -3,7 +3,7 @@
     <v-main>
       <app-header/>
       <v-container class="pa-7">
-        <nuxt />
+        <Nuxt />
       </v-container>
     </v-main>
   </v-app>
